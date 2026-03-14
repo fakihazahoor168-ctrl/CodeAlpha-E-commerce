@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura | Premium E-Commerce</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="grain-overlay"></div>
+    <div class="blobs">
+        <div class="blob-bg"></div>
+        <div class="blob-bg-2"></div>
+        <div class="blob-bg-3"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo nav-link" data-route="home">
+                <i class="fa-solid fa-shapes"></i> Aura.
+            </a>
+            
+            <div class="nav-links">
+                <a href="/" class="nav-link" data-route="home">Shop</a>
+            </div>
+
+            <div class="nav-actions">
+                <a href="/login" class="nav-link action-btn" data-route="login" id="authNavBtn">
+                    <i class="fa-regular fa-user"></i> <span id="authText">Login</span>
+                </a>
+                <a href="/orders" class="nav-link action-btn hidden" data-route="orders" id="ordersNavBtn">
+                    <i class="fa-solid fa-box-open"></i> Orders
+                </a>
+                <a href="/cart" class="nav-link action-btn cart-btn" data-route="cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <button class="action-btn hidden" id="logoutBtn" title="Logout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main id="app-content">
+        <!-- Content injected dynamically -->
+        <div class="loader-container">
+            <div class="spinner"></div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Aura E-Commerce. Premium Design Concept.</p>
+    </footer>
+
+    <!-- Templates -->
+    <template id="tmpl-home">
+        <header class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Elevate Your Lifestyle</h1>
+                <p class="hero-subtitle">Discover our curated collection of premium products designed for modern living.</p>
+                <button class="btn btn-primary scroll-to-products">Shop Collection</button>
+            </div>
+        </header>
+        
+        <section class="products-section">
+            <h2 class="section-title">Trending Now</h2>
+            <div class="product-grid" id="productGrid">
+                <!-- Products injected here -->
+            </div>
+        </section>
+    </template>
+
+    <template id="tmpl-product-detail">
+        <div class="product-detail-page">
+            <a href="/" class="back-link nav-link" data-route="home"><i class="fa-solid fa-arrow-left"></i> Back to Shop</a>
+            <div class="product-detail-container" id="productDetailContainer">
+                <div class="loader-container"><div class="spinner"></div></div>
+            </div>
+        </div>
+    </template>
+
+    <template id="tmpl-cart">
+        <div class="cart-page">
+            <h1 class="page-title">Your Shopping Cart</h1>
+            <div class="cart-container">
+                <div class="cart-items" id="cartItems">
+                    <!-- Cart items injected here -->
+                </div>
+                <div class="cart-summary">
+                    <h3>Order Summary</h3>
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span id="cartSubtotal">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Shipping</span>
+                        <span>Free</span>
+                    </div>
+                    <hr>
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span id="cartTotal">$0.00</span>
+                    </div>
+                    <button class="btn btn-primary checkout-btn" id="checkoutBtn">Proceed to Checkout</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="tmpl-login">
+        <div class="auth-page">
+            <div class="auth-box">
+                <h2>Welcome Back</h2>
+                <p class="auth-subtitle">Sign in to continue to Aura.</p>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" required placeholder="you@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" required placeholder="••••••••">
+                    </div>
+                    <p class="error-msg" id="loginError"></p>
+                    <button type="submit" class="btn btn-primary full-width">Sign In</button>
+                </form>
+                <p class="auth-switch">Don't have an account? <a href="/register" class="nav-link" data-route="register">Sign up</a></p>
+            </div>
+        </div>
+    </template>
+
+    <template id="tmpl-register">
+        <div class="auth-page">
+            <div class="auth-box">
+                <h2>Create Account</h2>
+                <p class="auth-subtitle">Join Aura to discover premium products.</p>
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="regName">Full Name</label>
+                        <input type="text" id="regName" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="regEmail">Email Address</label>
+                        <input type="email" id="regEmail" required placeholder="you@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="regPassword">Password</label>
+                        <input type="password" id="regPassword" required placeholder="••••••••">
+                    </div>
+                    <p class="error-msg" id="regError"></p>
+                    <button type="submit" class="btn btn-primary full-width">Create Account</button>
+                </form>
+                <p class="auth-switch">Already have an account? <a href="/login" class="nav-link" data-route="login">Sign in</a></p>
+            </div>
+        </div>
+    </template>
+
+    <template id="tmpl-orders">
+        <div class="orders-page">
+            <h1 class="page-title">Your Orders</h1>
+            <div class="orders-container" id="ordersContainer">
+               <!-- Orders injected here -->
+            </div>
+        </div>
+    </template>
+
+    <div id="toast" class="toast hidden">Message</div>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>
