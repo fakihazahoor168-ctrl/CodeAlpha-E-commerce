@@ -57,16 +57,89 @@
     </main>
 
     <footer class="footer">
-        <p>&copy; 2026 Aura E-Commerce. Premium Design Concept.</p>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="/" class="logo nav-link" data-route="home">
+                    <i class="fa-solid fa-shapes"></i> Aura.
+                </a>
+                <p>Elevate your lifestyle with our premium, curated collections. Designed for modern living.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h3>Shop</h3>
+                    <a href="#">New Arrivals</a>
+                    <a href="#">Best Sellers</a>
+                    <a href="#">Collections</a>
+                    <a href="#">Sale</a>
+                </div>
+                <div class="footer-col">
+                    <h3>Support</h3>
+                    <a href="#">FAQ</a>
+                    <a href="#">Shipping & Returns</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Track Order</a>
+                </div>
+                <div class="footer-col">
+                    <h3>Company</h3>
+                    <a href="#">About Us</a>
+                    <a href="#">Careers</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Aura E-Commerce. All rights reserved.</p>
+        </div>
     </footer>
 
     <!-- Templates -->
     <template id="tmpl-home">
-        <header class="hero">
-            <div class="hero-content">
-                <h1 class="hero-title">Elevate Your Lifestyle</h1>
-                <p class="hero-subtitle">Discover our curated collection of premium products designed for modern living.</p>
-                <button class="btn btn-primary scroll-to-products">Shop Collection</button>
+        <header class="hero-slider">
+            <div class="slider-container" id="heroSlider">
+                <div class="slide active">
+                    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop" alt="Latest Fashion" class="slide-bg">
+                    <div class="slide-overlay"></div>
+                    <div class="hero-content">
+                        <h1 class="hero-title text-white">Latest Fashion Trends</h1>
+                        <p class="hero-subtitle text-white">Discover our curated collection of premium clothing to elevate your style.</p>
+                        <button class="btn btn-primary scroll-to-products">Shop Collection</button>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=2071&auto=format&fit=crop" alt="Next Gen Tech" class="slide-bg">
+                    <div class="slide-overlay"></div>
+                    <div class="hero-content">
+                        <h1 class="hero-title text-white">Next Gen Tech</h1>
+                        <p class="hero-subtitle text-white">Explore top-tier gadgets, accessories, and tech engineered for modern life.</p>
+                        <button class="btn btn-primary scroll-to-products">Explore Now</button>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=2070&auto=format&fit=crop" alt="Modern Essentials" class="slide-bg">
+                    <div class="slide-overlay"></div>
+                    <div class="hero-content">
+                        <h1 class="hero-title text-white">Modern Essentials</h1>
+                        <p class="hero-subtitle text-white">Hand-picked clothing accessories and staples tailored for the ultimate daily experience.</p>
+                        <button class="btn btn-primary scroll-to-products">View Catalog</button>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="slider-btn prev-btn" onclick="window.app.prevSlide()"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="slider-btn next-btn" onclick="window.app.nextSlide()"><i class="fa-solid fa-chevron-right"></i></button>
+            
+            <div class="slider-dots">
+                <div class="dot active" onclick="window.app.goToSlide(0)"></div>
+                <div class="dot" onclick="window.app.goToSlide(1)"></div>
+                <div class="dot" onclick="window.app.goToSlide(2)"></div>
             </div>
         </header>
         

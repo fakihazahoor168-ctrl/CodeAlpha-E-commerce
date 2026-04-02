@@ -161,6 +161,11 @@ async function renderHome() {
         document.querySelector('.scroll-to-products')?.addEventListener('click', () => {
             document.querySelector('.products-section').scrollIntoView({ behavior: 'smooth' });
         });
+        
+        // Initialize Hero Slider
+        if(window.app && window.app.initSlider) {
+            window.app.initSlider();
+        }
 
     } catch (error) {
         grid.innerHTML = '<p>Error loading products.</p>';
@@ -417,6 +422,45 @@ function handleLogout() {
 
 // Global exposure for inline handlers
 window.app = {
+    currentSlide: 0,
+    slideInterval: null,
+    initSlider: () => {
+        const slides = document.querySelectorAll('.slide');
+        if(slides.length === 0) return;
+        clearInterval(window.app.slideInterval);
+        window.app.currentSlide = 0;
+        window.app.updateSliderUI();
+        window.app.slideInterval = setInterval(() => { window.app.nextSlide(); }, 5000);
+    },
+    updateSliderUI: () => {
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        slides.forEach((s, i) => s.classList.toggle('active', i === window.app.currentSlide));
+        dots.forEach((d, i) => d.classList.toggle('active', i === window.app.currentSlide));
+    },
+    nextSlide: () => {
+        const slides = document.querySelectorAll('.slide');
+        if(slides.length === 0) return;
+        window.app.currentSlide = (window.app.currentSlide + 1) % slides.length;
+        window.app.updateSliderUI();
+        window.app.resetInterval();
+    },
+    prevSlide: () => {
+        const slides = document.querySelectorAll('.slide');
+        if(slides.length === 0) return;
+        window.app.currentSlide = (window.app.currentSlide - 1 + slides.length) % slides.length;
+        window.app.updateSliderUI();
+        window.app.resetInterval();
+    },
+    goToSlide: (index) => {
+        window.app.currentSlide = index;
+        window.app.updateSliderUI();
+        window.app.resetInterval();
+    },
+    resetInterval: () => {
+        clearInterval(window.app.slideInterval);
+        window.app.slideInterval = setInterval(() => { window.app.nextSlide(); }, 5000);
+    },
     goToProduct: (id) => {
         window.history.pushState({ route: 'product-detail', params: { id } }, '', `/product/${id}`);
         loadRoute('product-detail', { id });
